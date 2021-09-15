@@ -71,7 +71,7 @@ export class AppComponent implements OnInit {
 
       this.Payment.remainder.push(remainder);
       this.Payment.term.push(this.Payment.monthly[i] + this.Payment.interest[i])
-      this.total += this.Payment.monthly[1] + this.Payment.interest[i]
+      this.total += this.Payment.term[i];
       i++;
     }
       
