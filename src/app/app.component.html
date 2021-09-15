@@ -10,11 +10,16 @@ Select years:
 
 <div>
   Select loan amount:
-  <input   type="number" [(ngModel)]="amount">
+  <input type="number" [(ngModel)]="amount">
 </div>
 
+<mat-radio-group aria-label="Select an option">
+  <mat-radio-button  [value]=1 ngDefaultControl [(ngModel)]="radio">Amortized</mat-radio-button>
+  <mat-radio-button  [value]=0 ngDefaultControl [(ngModel)]="radio">Annuity</mat-radio-button>
+</mat-radio-group>
 
-<button mat-raised-button (click)="paymentPlan()" mat-button color="primary">Generate payment plan</button>
+<button mat-raised-button (click)="selectPaymentPlan()" mat-button color="primary">Generate payment plan</button>
+<!-- <button mat-raised-button (click)="amoPaymentPlan()" mat-button color="primary">Generate payment plan</button> -->
 <div *ngIf="Payment.interest">
   Total cost:
   {{total | number: '1.2-2' }}
@@ -28,16 +33,16 @@ Select years:
     <td>Remaining amount</td>
     <td>Monthly payment</td>
     <td>Interest</td>
-    <td>Progress payment</td>
+    <td>Total this term</td>
   </tr>
   </thead>
     <tbody>
       <tr *ngFor="let item of Payment.remainder let i = index">
-    <td>{{i}}</td>
+    <td>{{i+1}}</td>
     <td>{{Payment.remainder[i] | number: '1.2-2'}}</td>
     <td>{{Payment.monthly[i]| number: '1.2-2'}}</td>
     <td>{{Payment.interest[i]| number: '1.2-2'}}</td>
-    <td>{{Payment.progress[i]| number: '1.2-2'}}</td>
+    <td>{{Payment.term[i]| number: '1.2-2'}}</td>
   </tr>
   </tbody>
 </table>

@@ -6,9 +6,11 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSliderModule } from '@angular/material/slider';
 import {FormsModule} from '@angular/forms'
-import {MatFormFieldModule } from '@angular/material/form-field'
-import {MatInputModule } from '@angular/material/input'
-import {MatButtonModule} from '@angular/material/button'
+import {MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule } from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import {MatButtonModule} from '@angular/material/button'
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatRadioModule,
+    MatSelectModule
     
   ],
   providers: [],
