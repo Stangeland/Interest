@@ -44,7 +44,6 @@ export class AppComponent implements OnInit {
     this.amoPaymentPlan();
   }
 
-
   serialPaymentPlan() {
     this.total = 0;
     this.Payment.interest = [];
@@ -61,14 +60,7 @@ export class AppComponent implements OnInit {
     while (i < n) {
       this.Payment.interest.push((remainder)*periodicRate);
       this.Payment.monthly.push(monthly);
-      // if ( i === 0) {
-      // this.Payment.progress.push(this.Payment.monthly[i] + this.Payment.interest[i]);
-      // } else {
-      //   this.Payment.progress.push(this.Payment.monthly[i] + this.Payment.interest[i] + this.Payment.progress[i-1]);
-      // }
-
       remainder = Math.round((remainder - (this.Payment.monthly[i]))*100)/100 ;
-
       this.Payment.remainder.push(remainder);
       this.Payment.term.push(this.Payment.monthly[i] + this.Payment.interest[i])
       this.total += this.Payment.term[i];
