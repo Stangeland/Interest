@@ -1,49 +1,65 @@
-<div>
-  Select interest:
-  <mat-slider (input)="interestSlider($event)" min="0" max="15" step="0.1" [(ngModel)]="interest"></mat-slider>
-  {{this.interest}} %
-<div>
-Select years:
-  <mat-slider (input)="yearSlider($event)" min="1" max="30" step="1" [(ngModel)]="time"></mat-slider>
-  {{time}}
-</div>
+<div >
+    <h1>Interest Calculator</h1>
+  <div class="calc">
+    <div>
+      Select interest:
+      <mat-slider (input)="interestSlider($event)" min="0" max="15" step="0.1" [(ngModel)]="interest"></mat-slider>
+      {{this.interest}} %
+    </div>
+    <div>
+      Select years:
+      <mat-slider (input)="yearSlider($event)" min="1" max="30" step="1" [(ngModel)]="time"></mat-slider>
+      {{time}}
+    </div>
 
-<div>
-  Select loan amount:
-  <input type="number" [(ngModel)]="amount">
-</div>
+    <div>
+      Select loan amount: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <span><input type="number" [(ngModel)]="amount"></span>
+    </div>
 
-<mat-radio-group aria-label="Select an option">
-  <mat-radio-button  [value]=1 ngDefaultControl [(ngModel)]="radio">Amortized</mat-radio-button>
-  <mat-radio-button  [value]=0 ngDefaultControl [(ngModel)]="radio">Annuity</mat-radio-button>
-</mat-radio-group>
+    <div>
+      Select monthly fees: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <span><input type="number" [(ngModel)]="monthlyFee"></span>
+    </div>
 
-<button mat-raised-button (click)="selectPaymentPlan()" mat-button color="primary">Generate payment plan</button>
-<!-- <button mat-raised-button (click)="amoPaymentPlan()" mat-button color="primary">Generate payment plan</button> -->
-<div *ngIf="Payment.interest">
-  Total cost:
-  {{total | number: '1.2-2' }}
-</div>
+    <div>
+      Select establishment fee:&nbsp;
+    <span><input type="number" [(ngModel)]="establishCost"></span>
+    </div>
+  </div>
+  <mat-radio-group aria-label="Select an option">
+    <mat-radio-button  [value]="1" ngDefaultControl [(ngModel)]="radio">Amortized</mat-radio-button>
+    <mat-radio-button  [value]="0" ngDefaultControl [(ngModel)]="radio">Annuity</mat-radio-button>
+  </mat-radio-group>
 
-<div id="payment"  >
-  <table>
-    <thead>
-      <tr>
-      <td>Month</td>
-    <td>Remaining amount</td>
-    <td>Monthly payment</td>
-    <td>Interest</td>
-    <td>Total this term</td>
-  </tr>
-  </thead>
-    <tbody>
-      <tr *ngFor="let item of Payment.remainder let i = index">
-    <td>{{i+1}}</td>
-    <td>{{Payment.remainder[i] | number: '1.2-2'}}</td>
-    <td>{{Payment.monthly[i]| number: '1.2-2'}}</td>
-    <td>{{Payment.interest[i]| number: '1.2-2'}}</td>
-    <td>{{Payment.term[i]| number: '1.2-2'}}</td>
-  </tr>
-  </tbody>
-</table>
+  <button style="margin: 4px;" mat-raised-button (click)="selectPaymentPlan()" mat-button color="primary">Generate payment plan</button>
+  <div *ngIf="total">
+    Total cost:
+    {{total | number: '1.2-2' }}
+  </div>
+
+  <div id="payment" *ngIf="total" >
+    <table>
+      <thead>
+        <tr>
+        <td>Month</td>
+      <td>Remaining amount</td>
+      <td>Monthly payment</td>
+      <td>Interest</td>
+      <td *ngIf="Payment.fee[0]> 0" >Monthly fee</td>
+      <td>Total this term</td>
+    </tr>
+    </thead>
+      <tbody>
+        <tr *ngFor="let item of Payment.remainder let i = index">
+      <td>{{i+1}}</td>
+      <td>{{Payment.remainder[i] | number: '1.2-2'}}</td>
+      <td>{{Payment.monthly[i]| number: '1.2-2'}}</td>
+      <td>{{Payment.interest[i]| number: '1.2-2'}}</td>
+      <td *ngIf="Payment.fee[i] > 0 ">{{Payment.fee[i]| number: '1.2-2'}}</td>
+      <td>{{Payment.term[i]| number: '1.2-2'}}</td>
+    </tr>
+    </tbody>
+  </table>
+  </div>
 </div>
